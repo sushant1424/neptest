@@ -59,9 +59,6 @@ export function Navbar() {
           </NavigationMenu>
         </nav>
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Toggle theme">
-            {isReady ? (theme === "dark" ? <Sun className="h-4 w-4"/> : <Moon className="h-4 w-4"/>) : <Sun className="h-4 w-4"/>}
-          </Button>
           <Button variant="ghost" size="icon" aria-label="Search"><Search className="h-4 w-4"/></Button>
           <Button variant="ghost" size="icon" aria-label="User"><User className="h-4 w-4"/></Button>
           <Button variant="ghost" size="icon" aria-label="Cart"><ShoppingCart className="h-4 w-4"/></Button>

@@ -32,7 +32,7 @@ const itemVariants = {
 };
 
 export default function Home() {
-  const { theme } = useTheme();
+  const { theme, isReady } = useTheme();
   
   return (
     <div className="font-(--font-body)">
@@ -41,14 +41,12 @@ export default function Home() {
       <WhyChoose />
 
       <section className={`relative py-20 overflow-hidden ${
-        theme === "dark"
-          ? "bg-[#111111]"
-          : "bg-[#f0ebe5]"
+        !isReady ? "bg-[#f0ebe5]" : theme === "dark" ? "bg-[#111111]" : "bg-[#f0ebe5]"
       }`}>
         
         {/* Mountain Silhouette Bottom */}
         <div className={`absolute bottom-0 left-0 right-0 h-32 pointer-events-none ${
-          theme === "dark" ? "opacity-10" : "opacity-15"
+          !isReady ? "opacity-15" : theme === "dark" ? "opacity-10" : "opacity-15"
         }`}>
           <svg className="w-full h-full" viewBox="0 0 1200 150" preserveAspectRatio="none">
             <path d="M0,150 L0,100 L200,50 L400,80 L600,30 L800,70 L1000,40 L1200,90 L1200,150 Z" 
@@ -65,10 +63,10 @@ export default function Home() {
             transition={{ duration: 0.6 }}
           >
             <h2 className={`text-center text-3xl sm:text-4xl tracking-[0.08em] font-semibold mb-3 ${
-              theme === "dark" ? "text-white" : "text-[#2d2520]"
+              !isReady ? "text-[#2d2520]" : theme === "dark" ? "text-white" : "text-[#2d2520]"
             }`} style={{fontFamily:"var(--font-display)"}}>FEATURED COLLECTION</h2>
             <p className={`text-center text-sm mb-12 ${
-              theme === "dark" ? "text-neutral-400" : "text-neutral-600"
+              !isReady ? "text-neutral-600" : theme === "dark" ? "text-neutral-400" : "text-neutral-600"
             }`}>Discover our most beloved pieces, each crafted with centuries of tradition</p>
           </motion.div>
           
@@ -117,7 +115,7 @@ export default function Home() {
           >
             <motion.a 
               href="#" 
-              className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-emerald-600 to-emerald-500 text-white px-6 py-3 text-sm font-medium shadow-lg shadow-emerald-500/20 group cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-lg bg-linear-to-r from-emerald-600 to-emerald-500 text-white px-6 py-3 text-sm font-medium shadow-lg shadow-emerald-500/20 group cursor-pointer"
               whileHover={{ scale: 1.08, boxShadow: "0 15px 40px rgba(107,74,50,0.4)", y: -3 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}

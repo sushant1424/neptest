@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Leaf, Users, Award, ShoppingBag, ArrowRight } from "lucide-react";
+import { Leaf, Users, Award, ShoppingBag, ArrowRight, Lightbulb, LightbulbOff, Sun, Moon } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import type { LucideIcon } from "lucide-react";
 import { useTheme } from "@/contexts/theme-context";
 
@@ -91,8 +92,7 @@ const particles = [
 ];
 
 export function Hero() {
-  const { theme } = useTheme();
-
+  const { theme, isReady, toggleTheme } = useTheme();
   return (
     <section className="relative min-h-screen w-full overflow-hidden">
       {/* Original Image Background */}
@@ -103,12 +103,47 @@ export function Hero() {
         priority
         className="object-cover"
       />
-
-      <div
-        className={`absolute inset-0 ${
-          theme === "dark" ? "bg-black/65" : "bg-black/30"
-        }`}
-      />
+      
+      {(() => {
+        const overlayClass = !isReady
+          ? "bg-black/60"
+          : theme === "dark"
+            ? "bg-black/65"
+            : "bg-black/30";
+        return <div className={`absolute inset-0 ${overlayClass}`}/>;
+      })()}
+      
+      {/* Theme Toggle - Right side floating */}
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <motion.button
+              onClick={toggleTheme}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className={`group absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 rounded-full p-3 md:p-3.5 backdrop-blur-md shadow-[0_10px_28px_rgba(0,0,0,0.28)] border ${
+                isReady && theme === "dark" ? "bg-white/20 border-white/30" : "bg-white/15 border-white/25"
+              }`}
+              aria-label={isReady && theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              aria-pressed={isReady && theme === "dark"}
+            >
+              {isReady ? (
+                theme === "dark" ? (
+                  <Moon className="h-5 w-5 md:h-6 md:w-6 text-amber-300" />
+                ) : (
+                  <Sun className="h-5 w-5 md:h-6 md:w-6 text-yellow-500" />
+                )
+              ) : (
+                <Sun className="h-5 w-5 md:h-6 md:w-6 text-white" />
+              )}
+            </motion.button>
+          </TooltipTrigger>
+          <TooltipContent side="left" className="backdrop-blur bg-white/20 text-white border-white/30">
+            {isReady && theme === "dark" ? "Light mode" : "Dark mode"}
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
 
       {/* Prayer Flags Animation - Enhanced */}
       <div className="absolute top-16 left-0 right-0 h-32 overflow-hidden pointer-events-none z-10">
@@ -139,7 +174,7 @@ export function Hero() {
           </motion.div>
         ))}
         <motion.div
-          className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-white/50 to-transparent shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+          className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-white/50 to-transparent shadow-[0_0_10px_rgba(255,255,255,0.5)]"
           animate={{ scaleX: [0.8, 1, 0.8] }}
           transition={{ duration: 3, repeat: Infinity }}
         />
@@ -223,10 +258,10 @@ export function Hero() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: true }}
               className="relative text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[0.18em] font-bold"
-              style={{ fontFamily: "var(--font-display)" }}
+              style={{ fontFamily: "var(--font-cinzel)" }}
             >
               <motion.span
-                className="bg-gradient-to-r from-amber-100 via-white to-amber-100 font-cinzel bg-clip-text text-transparent"
+                className="bg-linear-to-r from-amber-100 via-white to-amber-100 bg-clip-text text-transparent"
                 animate={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                 }}
@@ -313,7 +348,7 @@ export function Hero() {
                     className="relative rounded-xl bg-white/10 backdrop-blur-md shadow-[0_14px_40px_rgba(0,0,0,0.3)] border border-white/20 p-6 flex flex-col items-center text-center group cursor-pointer overflow-hidden"
                   >
                     <motion.div
-                      className={`absolute inset-0 bg-gradient-to-br ${card.hoverGradient} to-transparent opacity-0 group-hover:opacity-100`}
+                      className={`absolute inset-0 bg-linear-to-br ${card.hoverGradient} to-transparent opacity-0 group-hover:opacity-100`}
                       transition={{ duration: 0.3 }}
                     />
                     <motion.div
