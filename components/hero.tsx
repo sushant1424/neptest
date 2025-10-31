@@ -9,11 +9,11 @@ import { useTheme } from "@/contexts/theme-context";
 
 // Prayer flag colors
 const PRAYER_FLAG_COLORS = [
-  { bg: 'bg-blue-500/60', shadow: 'shadow-[0_0_20px_rgba(59,130,246,0.5)]' },
-  { bg: 'bg-white/60', shadow: 'shadow-[0_0_20px_rgba(255,255,255,0.5)]' },
-  { bg: 'bg-red-500/60', shadow: 'shadow-[0_0_20px_rgba(239,68,68,0.5)]' },
-  { bg: 'bg-emerald-500/60', shadow: 'shadow-[0_0_20px_rgba(16,185,129,0.5)]' },
-  { bg: 'bg-amber-400/60', shadow: 'shadow-[0_0_20px_rgba(251,191,36,0.5)]' },
+  { bg: "bg-blue-500/60", shadow: "shadow-[0_0_20px_rgba(59,130,246,0.5)]" },
+  { bg: "bg-white/60", shadow: "shadow-[0_0_20px_rgba(255,255,255,0.5)]" },
+  { bg: "bg-red-500/60", shadow: "shadow-[0_0_20px_rgba(239,68,68,0.5)]" },
+  { bg: "bg-emerald-500/60", shadow: "shadow-[0_0_20px_rgba(16,185,129,0.5)]" },
+  { bg: "bg-amber-400/60", shadow: "shadow-[0_0_20px_rgba(251,191,36,0.5)]" },
 ] as const;
 
 // Feature cards data
@@ -29,26 +29,26 @@ interface FeatureCard {
 const FEATURE_CARDS: FeatureCard[] = [
   {
     icon: Leaf,
-    iconColor: 'text-emerald-400',
-    hoverGradient: 'from-emerald-400/20',
-    title: '100% Eco-Friendly',
-    description: 'Sustainable hemp fiber',
+    iconColor: "text-emerald-400",
+    hoverGradient: "from-emerald-400/20",
+    title: "100% Eco-Friendly",
+    description: "Sustainable hemp fiber",
     delay: 0.1,
   },
   {
     icon: Users,
-    iconColor: 'text-blue-400',
-    hoverGradient: 'from-blue-400/20',
-    title: 'Fair Trade',
-    description: 'Supporting local artisans',
+    iconColor: "text-blue-400",
+    hoverGradient: "from-blue-400/20",
+    title: "Fair Trade",
+    description: "Supporting local artisans",
     delay: 0.2,
   },
   {
     icon: Award,
-    iconColor: 'text-amber-400',
-    hoverGradient: 'from-amber-400/20',
-    title: 'Quality Crafted',
-    description: '15+ years tradition',
+    iconColor: "text-amber-400",
+    hoverGradient: "from-amber-400/20",
+    title: "Quality Crafted",
+    description: "15+ years tradition",
     delay: 0.3,
   },
 ];
@@ -92,7 +92,7 @@ const particles = [
 
 export function Hero() {
   const { theme } = useTheme();
-  
+
   return (
     <section className="relative min-h-screen w-full overflow-hidden">
       {/* Original Image Background */}
@@ -103,11 +103,13 @@ export function Hero() {
         priority
         className="object-cover"
       />
-      
-      <div className={`absolute inset-0 ${
-        theme === "dark" ? "bg-black/65" : "bg-black/30"
-      }`}/>
-      
+
+      <div
+        className={`absolute inset-0 ${
+          theme === "dark" ? "bg-black/65" : "bg-black/30"
+        }`}
+      />
+
       {/* Prayer Flags Animation - Enhanced */}
       <div className="absolute top-16 left-0 right-0 h-32 overflow-hidden pointer-events-none z-10">
         {[...Array(12)].map((_, i) => (
@@ -115,7 +117,7 @@ export function Hero() {
             key={i}
             className="absolute w-16 h-12"
             style={{
-              left: `${(i * 8.33)}%`,
+              left: `${i * 8.33}%`,
               top: -10,
             }}
             animate={{
@@ -129,7 +131,11 @@ export function Hero() {
               delay: i * 0.1,
             }}
           >
-            <div className={`w-full h-full ${PRAYER_FLAG_COLORS[i % 5].bg} ${PRAYER_FLAG_COLORS[i % 5].shadow} backdrop-blur-sm border border-white/30 shadow-lg`} />
+            <div
+              className={`w-full h-full ${PRAYER_FLAG_COLORS[i % 5].bg} ${
+                PRAYER_FLAG_COLORS[i % 5].shadow
+              } backdrop-blur-sm border border-white/30 shadow-lg`}
+            />
           </motion.div>
         ))}
         <motion.div
@@ -141,7 +147,11 @@ export function Hero() {
 
       {/* Mountain Silhouette Overlay */}
       <div className="absolute bottom-0 left-0 right-0 h-64 pointer-events-none z-10">
-        <svg className="absolute bottom-0 w-full h-full opacity-20" viewBox="0 0 1200 300" preserveAspectRatio="none">
+        <svg
+          className="absolute bottom-0 w-full h-full opacity-20"
+          viewBox="0 0 1200 300"
+          preserveAspectRatio="none"
+        >
           <motion.path
             d="M0,300 L0,200 L200,100 L400,150 L600,50 L800,120 L1000,80 L1200,150 L1200,300 Z"
             fill="url(#mountainGradient)"
@@ -150,7 +160,13 @@ export function Hero() {
             transition={{ duration: 2 }}
           />
           <defs>
-            <linearGradient id="mountainGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <linearGradient
+              id="mountainGradient"
+              x1="0%"
+              y1="0%"
+              x2="0%"
+              y2="100%"
+            >
               <stop offset="0%" stopColor="#1a1a1a" stopOpacity="0.8" />
               <stop offset="100%" stopColor="#000000" stopOpacity="0.3" />
             </linearGradient>
@@ -185,14 +201,16 @@ export function Hero() {
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col pt-32">
         {/* Banner at top */}
         <div className="flex justify-center mb-8">
-          <motion.div 
+          <motion.div
             className="rounded-full bg-white/18 border border-white/35 text-white backdrop-blur-md px-6 py-2.5 inline-flex items-center gap-2 shadow-[0_10px_28px_rgba(0,0,0,0.28)]"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
             <Leaf className="h-4 w-4 text-emerald-300" />
-            <span className="text-sm">100% Sustainable • Handcrafted in Nepal • Est. 2010</span>
+            <span className="text-sm">
+              100% Sustainable • Handcrafted in Nepal • Est. 2010
+            </span>
           </motion.div>
         </div>
 
@@ -205,10 +223,10 @@ export function Hero() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: true }}
               className="relative text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[0.18em] font-bold"
-              style={{fontFamily:"var(--font-display)"}}
+              style={{ fontFamily: "var(--font-display)" }}
             >
               <motion.span
-                className="bg-gradient-to-r from-amber-100 via-white to-amber-100 bg-clip-text text-transparent"
+                className="bg-gradient-to-r from-amber-100 via-white to-amber-100 font-cinzel bg-clip-text text-transparent"
                 animate={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                 }}
@@ -240,7 +258,10 @@ export function Hero() {
               viewport={{ once: true }}
               className="max-w-2xl mx-auto text-sm sm:text-base text-white/85 leading-relaxed px-4"
             >
-              Every bag tells a story. Crafted by master artisans using centuries-old techniques, sustainable hemp, and adorned with traditional Nepali paper art. Experience the perfect blend of ancient wisdom and modern design.
+              Every bag tells a story. Crafted by master artisans using
+              centuries-old techniques, sustainable hemp, and adorned with
+              traditional Nepali paper art. Experience the perfect blend of
+              ancient wisdom and modern design.
             </motion.p>
           </div>
 
@@ -261,7 +282,10 @@ export function Hero() {
               </Button>
             </motion.div>
             <motion.div {...ANIMATION_CONFIG.hoverScale}>
-              <Button variant="outline" className="relative overflow-hidden rounded-md h-11 px-7 text-sm font-medium border-white/50 bg-white/5 text-white hover:bg-white/15 hover:text-white backdrop-blur-sm">
+              <Button
+                variant="outline"
+                className="relative overflow-hidden rounded-md h-11 px-7 text-sm font-medium border-white/50 bg-white/5 text-white hover:bg-white/15 hover:text-white backdrop-blur-sm"
+              >
                 <motion.div
                   className="absolute inset-0 bg-white/10"
                   initial={{ scale: 0, opacity: 0 }}
@@ -292,7 +316,7 @@ export function Hero() {
                       className={`absolute inset-0 bg-gradient-to-br ${card.hoverGradient} to-transparent opacity-0 group-hover:opacity-100`}
                       transition={{ duration: 0.3 }}
                     />
-                    <motion.div 
+                    <motion.div
                       className="mb-3 h-12 w-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center relative z-10"
                       whileHover={{ rotate: 360, scale: 1.2 }}
                       transition={{ duration: 0.6 }}
@@ -300,8 +324,12 @@ export function Hero() {
                       <Icon className={`h-6 w-6 ${card.iconColor}`} />
                     </motion.div>
                     <div className="text-white relative z-10">
-                      <div className="text-base font-semibold text-white mb-1">{card.title}</div>
-                      <div className="text-sm text-white/80">{card.description}</div>
+                      <div className="text-base font-semibold text-white mb-1">
+                        {card.title}
+                      </div>
+                      <div className="text-sm text-white/80">
+                        {card.description}
+                      </div>
                     </div>
                   </motion.div>
                 );
@@ -313,5 +341,3 @@ export function Hero() {
     </section>
   );
 }
-
-
