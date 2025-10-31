@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { ShoppingCart, Search, User, Menu, Sun, Moon } from "lucide-react";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, isReady } = useTheme();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -60,7 +60,7 @@ export function Navbar() {
         </nav>
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Toggle theme">
-            {theme === "dark" ? <Sun className="h-4 w-4"/> : <Moon className="h-4 w-4"/>}
+            {isReady ? (theme === "dark" ? <Sun className="h-4 w-4"/> : <Moon className="h-4 w-4"/>) : <Sun className="h-4 w-4"/>}
           </Button>
           <Button variant="ghost" size="icon" aria-label="Search"><Search className="h-4 w-4"/></Button>
           <Button variant="ghost" size="icon" aria-label="User"><User className="h-4 w-4"/></Button>
