@@ -40,9 +40,9 @@ export default function Home() {
       <section className="py-20 bg-[#f0ebe5] overflow-hidden">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: false, margin: "-100px", amount: 0.3 }}
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-center text-3xl sm:text-4xl tracking-[0.08em] font-semibold text-[#2d2520] mb-3" style={{fontFamily:"var(--font-display)"}}>FEATURED COLLECTION</h2>
@@ -54,7 +54,7 @@ export default function Home() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: false, margin: "-50px", amount: 0.2 }}
           >
             <motion.div variants={itemVariants}>
               <ProductCard 
@@ -89,14 +89,14 @@ export default function Home() {
             className="mt-12 flex justify-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.5 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <motion.a 
               href="#" 
-              className="inline-flex items-center gap-2 rounded-lg bg-[#6b4a32] text-white px-6 py-3 text-sm font-medium shadow-md group"
-              whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
-              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 rounded-lg bg-[#6b4a32] text-white px-6 py-3 text-sm font-medium shadow-md group cursor-pointer"
+              whileHover={{ scale: 1.08, boxShadow: "0 15px 40px rgba(107,74,50,0.4)", y: -3 }}
+              whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}
             >
               View Full Collection
@@ -105,7 +105,7 @@ export default function Home() {
                 fill="none" 
                 stroke="currentColor" 
                 viewBox="0 0 24 24"
-                animate={{ x: [0, 4, 0] }}
+                animate={{ x: [0, 5, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

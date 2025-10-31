@@ -29,7 +29,7 @@ export function Signature() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, margin: "-100px", amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
           <h3 className="text-center text-3xl sm:text-4xl tracking-[0.08em] font-semibold text-[#2d2520] mb-3" style={{fontFamily:"var(--font-display)"}}>Our Signature Collection</h3>
@@ -39,12 +39,12 @@ export function Signature() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
           {/* Image */}
           <motion.div 
-            className="relative aspect-square rounded-2xl overflow-hidden shadow-lg bg-white p-6"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            whileHover={{ scale: 1.02 }}
+            className="relative aspect-square rounded-2xl overflow-hidden shadow-lg bg-white p-6 cursor-pointer"
+            initial={{ opacity: 0, x: -50, rotateY: -15 }}
+            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+            viewport={{ once: false, margin: "-100px", amount: 0.3 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            whileHover={{ scale: 1.03, rotateY: 5, boxShadow: "0 25px 50px rgba(0,0,0,0.2)" }}
           >
             <div className="relative w-full h-full">
               <Image 
@@ -61,16 +61,16 @@ export function Signature() {
             {features.map((feature, i) => (
               <motion.div 
                 key={i} 
-                className="rounded-xl bg-white border border-[#e0d5c7] p-5 flex items-start gap-4 shadow-sm hover:shadow-lg transition-all group"
+                className="rounded-xl bg-white border border-[#e0d5c7] p-5 flex items-start gap-4 shadow-sm hover:shadow-xl transition-all group cursor-pointer"
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: false, margin: "-50px", amount: 0.2 }}
                 transition={{ duration: 0.5, delay: i * 0.15, ease: "easeOut" }}
-                whileHover={{ x: 8, scale: 1.02 }}
+                whileHover={{ x: 10, scale: 1.03, borderColor: "#2d7a5f" }}
               >
                 <motion.div 
                   className="flex-shrink-0 h-10 w-10 rounded-lg bg-[#2d7a5f] flex items-center justify-center"
-                  whileHover={{ rotate: 360 }}
+                  whileHover={{ rotate: [0, 360], scale: [1, 1.2, 1] }}
                   transition={{ duration: 0.6 }}
                 >
                   <feature.icon className="h-5 w-5 text-white"/>
@@ -87,14 +87,14 @@ export function Signature() {
         {/* Quote Box */}
         <motion.div 
           className="mx-auto max-w-4xl"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: false, margin: "-100px", amount: 0.3 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <motion.div 
-            className="rounded-2xl bg-gradient-to-r from-[#5a7d8c] to-[#4a7c59] text-white text-center py-8 px-6 shadow-lg"
-            whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(0,0,0,0.2)" }}
+            className="rounded-2xl bg-gradient-to-r from-[#5a7d8c] to-[#4a7c59] text-white text-center py-8 px-6 shadow-lg cursor-pointer"
+            whileHover={{ scale: 1.03, boxShadow: "0 25px 50px rgba(0,0,0,0.25)", y: -5 }}
             transition={{ duration: 0.3 }}
           >
             <p className="text-lg sm:text-xl font-light italic leading-relaxed">

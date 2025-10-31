@@ -42,7 +42,7 @@ export function WhyChoose() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, margin: "-100px", amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-center text-3xl sm:text-4xl tracking-[0.12em] font-semibold text-[#2d2520] mb-3" style={{fontFamily:"var(--font-display)"}}>Why Choose Antique Nepal</h2>
@@ -54,20 +54,20 @@ export function WhyChoose() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: false, margin: "-50px", amount: 0.2 }}
         >
           {items.map((it, index) => (
             <motion.div 
               key={it.title} 
               variants={itemVariants}
-              whileHover={{ y: -8, scale: 1.02 }}
+              whileHover={{ y: -12, scale: 1.03, boxShadow: "0 20px 40px rgba(0,0,0,0.15)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="rounded-xl bg-white border border-[#e8e0d8] p-8 shadow-sm hover:shadow-xl text-center group"
+              className="rounded-xl bg-white border border-[#e8e0d8] p-8 shadow-sm hover:shadow-2xl text-center group cursor-pointer"
             >
               <motion.div 
                 className="mx-auto mb-5 h-16 w-16 rounded-full bg-[#e8f3e8] flex items-center justify-center"
-                whileHover={{ rotate: 360, scale: 1.1 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
+                whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.15 }}
+                transition={{ duration: 0.5 }}
               >
                 <it.icon className="h-7 w-7 text-[#4a7c59] transition-transform group-hover:scale-110"/>
               </motion.div>
