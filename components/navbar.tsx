@@ -1,15 +1,34 @@
 "use client";
 
 import Link from "next/link";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ShoppingCart, Search, User, Menu } from "lucide-react";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { scrollY } = useScroll();
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-white/70 backdrop-blur supports-backdrop-filter:bg-white/60 border-b">
+    <motion.header 
+      className={`fixed top-0 inset-x-0 z-50 backdrop-blur transition-all duration-300 border-b ${
+        scrolled ? 'bg-white/90 shadow-md' : 'bg-white/70'
+      }`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <button className="sm:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
@@ -53,7 +72,7 @@ export function Navbar() {
           </div>
         </div>
       )}
-    </header>
+    </motion.header>
   );
 }
 
