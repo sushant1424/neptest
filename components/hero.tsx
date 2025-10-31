@@ -152,7 +152,7 @@ export function Hero() {
               style={{ fontFamily: "var(--font-display)" }}
             >
               <motion.span
-                className="bg-gradient-to-r from-white via-amber-100 to-white font-cinzel bg-clip-text text-transparent"
+                className="bg-gradient-to-r from-white via-amber-100 to-white font-cinzel bg-clip-text  text-transparent"
                 animate={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                 }}
