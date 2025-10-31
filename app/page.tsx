@@ -37,8 +37,30 @@ export default function Home() {
       <Hero />
       <WhyChoose />
 
-      <section className="py-20 bg-[#f0ebe5] overflow-hidden">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20 bg-[#f0ebe5] overflow-hidden">
+        {/* Hemp Fiber Texture Pattern */}
+        <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
+          <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="hempTexture" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M0,20 Q10,10 20,20 T40,20" stroke="currentColor" strokeWidth="0.5" fill="none"/>
+                <path d="M20,0 Q30,10 20,20 T20,40" stroke="currentColor" strokeWidth="0.5" fill="none"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#hempTexture)" />
+          </svg>
+        </div>
+        
+        {/* Mountain Silhouette Bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none opacity-5">
+          <svg className="w-full h-full" viewBox="0 0 1200 150" preserveAspectRatio="none">
+            <path d="M0,150 L0,100 L200,50 L400,80 L600,30 L800,70 L1000,40 L1200,90 L1200,150 Z" 
+                  fill="currentColor" 
+                  className="text-[#2d2520]"/>
+          </svg>
+        </div>
+        
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}

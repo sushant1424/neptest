@@ -28,11 +28,67 @@ export function Hero() {
       />
       <div className="absolute inset-0 bg-black/65"/>
       
-      {/* Floating Particles */}
+      {/* Prayer Flags Animation */}
+      <div className="absolute top-16 left-0 right-0 h-32 overflow-hidden pointer-events-none z-10">
+        {[...Array(12)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-16 h-12"
+            style={{
+              left: `${(i * 8.33)}%`,
+              top: -10,
+            }}
+            animate={{
+              y: [0, 8, 0],
+              rotate: [0, 3, 0, -3, 0],
+            }}
+            transition={{
+              duration: 2 + i * 0.2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.1,
+            }}
+          >
+            <div className={`w-full h-full ${
+              i % 5 === 0 ? 'bg-blue-400/40' :
+              i % 5 === 1 ? 'bg-white/40' :
+              i % 5 === 2 ? 'bg-red-400/40' :
+              i % 5 === 3 ? 'bg-green-400/40' :
+              'bg-yellow-400/40'
+            } backdrop-blur-sm border border-white/20 shadow-lg`} />
+          </motion.div>
+        ))}
+        <motion.div
+          className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+          animate={{ scaleX: [0.8, 1, 0.8] }}
+          transition={{ duration: 3, repeat: Infinity }}
+        />
+      </div>
+
+      {/* Mountain Silhouette Overlay */}
+      <div className="absolute bottom-0 left-0 right-0 h-64 pointer-events-none z-10">
+        <svg className="absolute bottom-0 w-full h-full opacity-20" viewBox="0 0 1200 300" preserveAspectRatio="none">
+          <motion.path
+            d="M0,300 L0,200 L200,100 L400,150 L600,50 L800,120 L1000,80 L1200,150 L1200,300 Z"
+            fill="url(#mountainGradient)"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.3 }}
+            transition={{ duration: 2 }}
+          />
+          <defs>
+            <linearGradient id="mountainGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#1a1a1a" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#000000" stopOpacity="0.3" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      {/* Floating Particles (Snow/Dust) */}
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-white/20 backdrop-blur-sm"
+          className="absolute rounded-full bg-white/30 backdrop-blur-sm"
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
@@ -41,7 +97,7 @@ export function Hero() {
           }}
           animate={{
             y: [0, -30, 0],
-            opacity: [0.2, 0.5, 0.2],
+            opacity: [0.2, 0.6, 0.2],
             scale: [1, 1.2, 1],
           }}
           transition={{
@@ -52,13 +108,18 @@ export function Hero() {
           }}
         />
       ))}
-      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col pt-24">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col pt-32">
         {/* Banner at top */}
-        <div className="flex justify-center mb-6">
-          <div className="rounded-full bg-white/18 border border-white/35 text-white backdrop-blur-md px-6 py-2.5 inline-flex items-center gap-2 shadow-[0_10px_28px_rgba(0,0,0,0.28)]">
+        <div className="flex justify-center mb-8">
+          <motion.div 
+            className="rounded-full bg-white/18 border border-white/35 text-white backdrop-blur-md px-6 py-2.5 inline-flex items-center gap-2 shadow-[0_10px_28px_rgba(0,0,0,0.28)]"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
             <Leaf className="h-4 w-4 text-emerald-300" />
             <span className="text-sm">100% Sustainable • Handcrafted in Nepal • Est. 2010</span>
-          </div>
+          </motion.div>
         </div>
 
         {/* Main content centered */}
@@ -187,11 +248,11 @@ export function Hero() {
                 transition={{ duration: 0.3 }}
               />
               <motion.div 
-                className="mb-3 h-12 w-12 rounded-full bg-white/15 border border-white/30 flex items-center justify-center relative z-10"
+                className="mb-3 h-12 w-12 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center relative z-10"
                 whileHover={{ rotate: 360, scale: 1.2 }}
                 transition={{ duration: 0.6 }}
               >
-                <Leaf className="h-6 w-6 text-white"/>
+                <Leaf className="h-6 w-6 text-emerald-300"/>
               </motion.div>
               <div className="text-white relative z-10">
                 <div className="text-base font-semibold text-white mb-1">100% Eco-Friendly</div>
@@ -212,11 +273,11 @@ export function Hero() {
                 transition={{ duration: 0.3 }}
               />
               <motion.div 
-                className="mb-3 h-12 w-12 rounded-full bg-white/15 border border-white/30 flex items-center justify-center relative z-10"
+                className="mb-3 h-12 w-12 rounded-full bg-blue-500/20 border border-blue-400/40 flex items-center justify-center relative z-10"
                 whileHover={{ rotate: 360, scale: 1.2 }}
                 transition={{ duration: 0.6 }}
               >
-                <Users className="h-6 w-6 text-white"/>
+                <Users className="h-6 w-6 text-blue-300"/>
               </motion.div>
               <div className="text-white relative z-10">
                 <div className="text-base font-semibold text-white mb-1">Fair Trade</div>
@@ -237,11 +298,11 @@ export function Hero() {
                 transition={{ duration: 0.3 }}
               />
               <motion.div 
-                className="mb-3 h-12 w-12 rounded-full bg-white/15 border border-white/30 flex items-center justify-center relative z-10"
+                className="mb-3 h-12 w-12 rounded-full bg-amber-500/20 border border-amber-400/40 flex items-center justify-center relative z-10"
                 whileHover={{ rotate: 360, scale: 1.2 }}
                 transition={{ duration: 0.6 }}
               >
-                <Award className="h-6 w-6 text-white"/>
+                <Award className="h-6 w-6 text-amber-300"/>
               </motion.div>
               <div className="text-white relative z-10">
                 <div className="text-base font-semibold text-white mb-1">Quality Crafted</div>

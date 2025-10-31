@@ -37,15 +37,115 @@ const itemVariants = {
 
 export function WhyChoose() {
   return (
-    <section className="py-20 bg-[#f9f6f3] overflow-hidden">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <section className="relative py-20 bg-[#f9f6f3] overflow-hidden">
+      {/* Traditional Nepali Pattern Background */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="nepaliPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+              <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="1"/>
+              <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="1"/>
+              <circle cx="50" cy="50" r="10" fill="none" stroke="currentColor" strokeWidth="1"/>
+              <path d="M50,20 L50,80 M20,50 L80,50" stroke="currentColor" strokeWidth="1"/>
+              <path d="M35,35 L65,65 M65,35 L35,65" stroke="currentColor" strokeWidth="1"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#nepaliPattern)" />
+        </svg>
+      </div>
+      
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, margin: "-100px", amount: 0.3 }}
           transition={{ duration: 0.6 }}
+          className="relative"
         >
-          <h2 className="text-center text-3xl sm:text-4xl tracking-[0.12em] font-semibold text-[#2d2520] mb-3" style={{fontFamily:"var(--font-display)"}}>Why Choose Antique Nepal</h2>
+          {/* Hemp Plant & Mountain Elements */}
+          <div className="flex items-center justify-center gap-3 mb-4">
+            {/* Hemp Leaf Left */}
+            <motion.svg 
+              width="40" 
+              height="40" 
+              viewBox="0 0 24 24" 
+              className="text-emerald-700"
+              animate={{ rotate: [0, 5, 0, -5, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <path d="M12,2 L12,22 M12,6 L8,10 M12,6 L16,10 M12,10 L7,14 M12,10 L17,14 M12,14 L6,18 M12,14 L18,18" 
+                    stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.7"/>
+              <circle cx="8" cy="10" r="2" fill="currentColor" opacity="0.4"/>
+              <circle cx="16" cy="10" r="2" fill="currentColor" opacity="0.4"/>
+              <circle cx="7" cy="14" r="2.5" fill="currentColor" opacity="0.5"/>
+              <circle cx="17" cy="14" r="2.5" fill="currentColor" opacity="0.5"/>
+              <circle cx="6" cy="18" r="3" fill="currentColor" opacity="0.6"/>
+              <circle cx="18" cy="18" r="3" fill="currentColor" opacity="0.6"/>
+            </motion.svg>
+            
+            {/* Mountain Icon */}
+            <motion.svg 
+              width="30" 
+              height="30" 
+              viewBox="0 0 24 24" 
+              className="text-slate-600"
+              animate={{ y: [0, -3, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <path d="M3,20 L9,8 L12,13 L15,6 L21,20 Z" fill="currentColor" opacity="0.5"/>
+              <path d="M5,20 L9,12 L12,16 L15,10 L19,20 Z" fill="currentColor" opacity="0.3"/>
+            </motion.svg>
+            
+            <h2 className="text-center text-3xl sm:text-4xl tracking-[0.12em] font-semibold text-[#2d2520]" style={{fontFamily:"var(--font-display)"}}>Why Choose Antique Nepal</h2>
+            
+            {/* Mountain Icon Right */}
+            <motion.svg 
+              width="30" 
+              height="30" 
+              viewBox="0 0 24 24" 
+              className="text-slate-600"
+              animate={{ y: [0, -3, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+            >
+              <path d="M3,20 L9,8 L12,13 L15,6 L21,20 Z" fill="currentColor" opacity="0.5"/>
+              <path d="M5,20 L9,12 L12,16 L15,10 L19,20 Z" fill="currentColor" opacity="0.3"/>
+            </motion.svg>
+            
+            {/* Hemp Leaf Right */}
+            <motion.svg 
+              width="40" 
+              height="40" 
+              viewBox="0 0 24 24" 
+              className="text-emerald-700"
+              animate={{ rotate: [0, -5, 0, 5, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            >
+              <path d="M12,2 L12,22 M12,6 L8,10 M12,6 L16,10 M12,10 L7,14 M12,10 L17,14 M12,14 L6,18 M12,14 L18,18" 
+                    stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.7"/>
+              <circle cx="8" cy="10" r="2" fill="currentColor" opacity="0.4"/>
+              <circle cx="16" cy="10" r="2" fill="currentColor" opacity="0.4"/>
+              <circle cx="7" cy="14" r="2.5" fill="currentColor" opacity="0.5"/>
+              <circle cx="17" cy="14" r="2.5" fill="currentColor" opacity="0.5"/>
+              <circle cx="6" cy="18" r="3" fill="currentColor" opacity="0.6"/>
+              <circle cx="18" cy="18" r="3" fill="currentColor" opacity="0.6"/>
+            </motion.svg>
+          </div>
+          {/* Decorative Line */}
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <motion.div 
+              className="h-px w-16 bg-gradient-to-r from-transparent to-emerald-600/30"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            />
+            <div className="w-2 h-2 rounded-full bg-emerald-600/40" />
+            <motion.div 
+              className="h-px w-16 bg-gradient-to-l from-transparent to-emerald-600/30"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            />
+          </div>
           <p className="text-center text-sm text-neutral-600 mb-12">Authenticity, sustainability, and craftsmanship in every bag</p>
         </motion.div>
         
