@@ -2,9 +2,17 @@ import type { Metadata } from "next";
 import { Cinzel, Inter } from "next/font/google";
 import "./globals.css";
 
-const displaySerif = Cinzel({ weight: ["400","700"], subsets: ["latin"], variable: "--font-display" });
-const bodySans = Inter({ subsets: ["latin"], variable: "--font-body" });
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], // optional — choose what you need
+});
 
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], // optional — choose what you need
+});
 export const metadata: Metadata = {
   title: "Antique Nepal",
   description: "Handcrafted Hemp Bags Woven with Himalayan Heritage",
@@ -18,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${displaySerif.variable} ${bodySans.variable} antialiased bg-background text-foreground`}
+        className={`${cinzel.variable} ${inter.variable} antialiased bg-background text-foreground`}
       >
         {children}
       </body>

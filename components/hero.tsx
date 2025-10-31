@@ -26,8 +26,8 @@ export function Hero() {
         priority
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-black/65"/>
-      
+      <div className="absolute inset-0 bg-black/65" />
+
       {/* Prayer Flags Animation */}
       <div className="absolute top-16 left-0 right-0 h-32 overflow-hidden pointer-events-none z-10">
         {[...Array(12)].map((_, i) => (
@@ -35,7 +35,7 @@ export function Hero() {
             key={i}
             className="absolute w-16 h-12"
             style={{
-              left: `${(i * 8.33)}%`,
+              left: `${i * 8.33}%`,
               top: -10,
             }}
             animate={{
@@ -49,13 +49,19 @@ export function Hero() {
               delay: i * 0.1,
             }}
           >
-            <div className={`w-full h-full ${
-              i % 5 === 0 ? 'bg-blue-400/40' :
-              i % 5 === 1 ? 'bg-white/40' :
-              i % 5 === 2 ? 'bg-red-400/40' :
-              i % 5 === 3 ? 'bg-green-400/40' :
-              'bg-yellow-400/40'
-            } backdrop-blur-sm border border-white/20 shadow-lg`} />
+            <div
+              className={`w-full h-full ${
+                i % 5 === 0
+                  ? "bg-blue-400/40"
+                  : i % 5 === 1
+                  ? "bg-white/40"
+                  : i % 5 === 2
+                  ? "bg-red-400/40"
+                  : i % 5 === 3
+                  ? "bg-green-400/40"
+                  : "bg-yellow-400/40"
+              } backdrop-blur-sm border border-white/20 shadow-lg`}
+            />
           </motion.div>
         ))}
         <motion.div
@@ -67,7 +73,11 @@ export function Hero() {
 
       {/* Mountain Silhouette Overlay */}
       <div className="absolute bottom-0 left-0 right-0 h-64 pointer-events-none z-10">
-        <svg className="absolute bottom-0 w-full h-full opacity-20" viewBox="0 0 1200 300" preserveAspectRatio="none">
+        <svg
+          className="absolute bottom-0 w-full h-full opacity-20"
+          viewBox="0 0 1200 300"
+          preserveAspectRatio="none"
+        >
           <motion.path
             d="M0,300 L0,200 L200,100 L400,150 L600,50 L800,120 L1000,80 L1200,150 L1200,300 Z"
             fill="url(#mountainGradient)"
@@ -76,7 +86,13 @@ export function Hero() {
             transition={{ duration: 2 }}
           />
           <defs>
-            <linearGradient id="mountainGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <linearGradient
+              id="mountainGradient"
+              x1="0%"
+              y1="0%"
+              x2="0%"
+              y2="100%"
+            >
               <stop offset="0%" stopColor="#1a1a1a" stopOpacity="0.8" />
               <stop offset="100%" stopColor="#000000" stopOpacity="0.3" />
             </linearGradient>
@@ -111,14 +127,16 @@ export function Hero() {
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col pt-32">
         {/* Banner at top */}
         <div className="flex justify-center mb-8">
-          <motion.div 
+          <motion.div
             className="rounded-full bg-white/18 border border-white/35 text-white backdrop-blur-md px-6 py-2.5 inline-flex items-center gap-2 shadow-[0_10px_28px_rgba(0,0,0,0.28)]"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
             <Leaf className="h-4 w-4 text-emerald-300" />
-            <span className="text-sm">100% Sustainable • Handcrafted in Nepal • Est. 2010</span>
+            <span className="text-sm">
+              100% Sustainable • Handcrafted in Nepal • Est. 2010
+            </span>
           </motion.div>
         </div>
 
@@ -131,10 +149,10 @@ export function Hero() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: true }}
               className="relative text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[0.18em] font-bold"
-              style={{fontFamily:"var(--font-display)"}}
+              style={{ fontFamily: "var(--font-display)" }}
             >
               <motion.span
-                className="bg-gradient-to-r from-white via-amber-100 to-white bg-clip-text text-transparent"
+                className="bg-gradient-to-r from-white via-amber-100 to-white font-cinzel bg-clip-text text-transparent"
                 animate={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                 }}
@@ -171,7 +189,7 @@ export function Hero() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, duration: 0.7 }}
               viewport={{ once: true }}
-              className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-white/95 font-medium"
+              className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-white/95 font-inter font-medium"
             >
               Handcrafted Hemp Bags Woven with Himalayan Heritage
             </motion.p>
@@ -180,9 +198,12 @@ export function Hero() {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.7 }}
               viewport={{ once: true }}
-              className="max-w-2xl mx-auto text-sm sm:text-base text-white/85 leading-relaxed px-4"
+              className="max-w-2xl mx-auto text-sm sm:text-base text-white/85 font-inter leading-relaxed px-4"
             >
-              Every bag tells a story. Crafted by master artisans using centuries-old techniques, sustainable hemp, and adorned with traditional Nepali paper art. Experience the perfect blend of ancient wisdom and modern design.
+              Every bag tells a story. Crafted by master artisans using
+              centuries-old techniques, sustainable hemp, and adorned with
+              traditional Nepali paper art. Experience the perfect blend of
+              ancient wisdom and modern design.
             </motion.p>
           </div>
 
@@ -204,8 +225,8 @@ export function Hero() {
                     ease: "linear",
                   }}
                 />
-                <span className="relative flex items-center">
-                  <ShoppingBag className="mr-2 h-4 w-4" />
+                <span className="relative flex items-center font-cinzel">
+                  <ShoppingBag className="mr-2 h-4 w-4 " />
                   Explore Collection
                   <motion.span
                     animate={{ x: [0, 3, 0] }}
@@ -220,7 +241,10 @@ export function Hero() {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button variant="outline" className="relative overflow-hidden rounded-md h-11 px-7 text-sm font-medium border-white/50 bg-white/5 text-white hover:bg-white/15 hover:text-white backdrop-blur-sm">
+              <Button
+                variant="outline"
+                className="relative overflow-hidden rounded-md h-11 px-7 text-sm font-medium font-cinzel border-white/50 bg-white/5 text-white hover:bg-white/15 hover:text-white backdrop-blur-sm"
+              >
                 <motion.div
                   className="absolute inset-0 bg-white/10"
                   initial={{ scale: 0, opacity: 0 }}
@@ -235,86 +259,96 @@ export function Hero() {
           {/* Feature Cards */}
           <div className="max-w-5xl w-full px-6 pb-12">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.6 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -8, scale: 1.05 }}
-              className="relative rounded-xl bg-white/10 backdrop-blur-md shadow-[0_14px_40px_rgba(0,0,0,0.3)] border border-white/20 p-6 flex flex-col items-center text-center group cursor-pointer overflow-hidden"
-            >
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-transparent opacity-0 group-hover:opacity-100"
-                transition={{ duration: 0.3 }}
-              />
-              <motion.div 
-                className="mb-3 h-12 w-12 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center relative z-10"
-                whileHover={{ rotate: 360, scale: 1.2 }}
-                transition={{ duration: 0.6 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1, duration: 0.6 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8, scale: 1.05 }}
+                className="relative rounded-xl bg-white/10 backdrop-blur-md shadow-[0_14px_40px_rgba(0,0,0,0.3)] border border-white/20 p-6 flex flex-col items-center text-center group cursor-pointer overflow-hidden"
               >
-                <Leaf className="h-6 w-6 text-emerald-300"/>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-transparent opacity-0 group-hover:opacity-100"
+                  transition={{ duration: 0.3 }}
+                />
+                <motion.div
+                  className="mb-3 h-12 w-12 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center relative z-10"
+                  whileHover={{ rotate: 360, scale: 1.2 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <Leaf className="h-6 w-6 text-emerald-300" />
+                </motion.div>
+                <div className="text-white relative z-10">
+                  <div className="text-base font-semibold font-inter text-white mb-1">
+                    100% Eco-Friendly
+                  </div>
+                  <div className="text-sm font-inter text-white/80">
+                    Sustainable hemp fiber
+                  </div>
+                </div>
               </motion.div>
-              <div className="text-white relative z-10">
-                <div className="text-base font-semibold text-white mb-1">100% Eco-Friendly</div>
-                <div className="text-sm text-white/80">Sustainable hemp fiber</div>
-              </div>
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -8, scale: 1.05 }}
-              className="relative rounded-xl bg-white/10 backdrop-blur-md shadow-[0_14px_40px_rgba(0,0,0,0.3)] border border-white/20 p-6 flex flex-col items-center text-center group cursor-pointer overflow-hidden"
-            >
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-transparent opacity-0 group-hover:opacity-100"
-                transition={{ duration: 0.3 }}
-              />
-              <motion.div 
-                className="mb-3 h-12 w-12 rounded-full bg-blue-500/20 border border-blue-400/40 flex items-center justify-center relative z-10"
-                whileHover={{ rotate: 360, scale: 1.2 }}
-                transition={{ duration: 0.6 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8, scale: 1.05 }}
+                className="relative rounded-xl bg-white/10 backdrop-blur-md shadow-[0_14px_40px_rgba(0,0,0,0.3)] border border-white/20 p-6 flex flex-col items-center text-center group cursor-pointer overflow-hidden"
               >
-                <Users className="h-6 w-6 text-blue-300"/>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-transparent opacity-0 group-hover:opacity-100"
+                  transition={{ duration: 0.3 }}
+                />
+                <motion.div
+                  className="mb-3 h-12 w-12 rounded-full bg-blue-500/20 border border-blue-400/40 flex items-center justify-center relative z-10"
+                  whileHover={{ rotate: 360, scale: 1.2 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <Users className="h-6 w-6 text-blue-300" />
+                </motion.div>
+                <div className="text-white relative z-10">
+                  <div className="text-base font-inter font-semibold text-white mb-1">
+                    Fair Trade
+                  </div>
+                  <div className="text-sm text-white/80">
+                    Supporting local artisans
+                  </div>
+                </div>
               </motion.div>
-              <div className="text-white relative z-10">
-                <div className="text-base font-semibold text-white mb-1">Fair Trade</div>
-                <div className="text-sm text-white/80">Supporting local artisans</div>
-              </div>
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -8, scale: 1.05 }}
-              className="relative rounded-xl bg-white/10 backdrop-blur-md shadow-[0_14px_40px_rgba(0,0,0,0.3)] border border-white/20 p-6 flex flex-col items-center text-center group cursor-pointer overflow-hidden"
-            >
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-amber-400/20 to-transparent opacity-0 group-hover:opacity-100"
-                transition={{ duration: 0.3 }}
-              />
-              <motion.div 
-                className="mb-3 h-12 w-12 rounded-full bg-amber-500/20 border border-amber-400/40 flex items-center justify-center relative z-10"
-                whileHover={{ rotate: 360, scale: 1.2 }}
-                transition={{ duration: 0.6 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8, scale: 1.05 }}
+                className="relative rounded-xl bg-white/10 backdrop-blur-md shadow-[0_14px_40px_rgba(0,0,0,0.3)] border border-white/20 p-6 flex flex-col items-center text-center group cursor-pointer overflow-hidden"
               >
-                <Award className="h-6 w-6 text-amber-300"/>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-amber-400/20 to-transparent opacity-0 group-hover:opacity-100"
+                  transition={{ duration: 0.3 }}
+                />
+                <motion.div
+                  className="mb-3 h-12 w-12 rounded-full bg-amber-500/20 border border-amber-400/40 flex items-center justify-center relative z-10"
+                  whileHover={{ rotate: 360, scale: 1.2 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <Award className="h-6 w-6 text-amber-300" />
+                </motion.div>
+                <div className="text-white relative z-10">
+                  <div className="text-base font-semibold font-inter text-white mb-1">
+                    Quality Crafted
+                  </div>
+                  <div className="text-sm text-white/80">
+                    15+ years tradition
+                  </div>
+                </div>
               </motion.div>
-              <div className="text-white relative z-10">
-                <div className="text-base font-semibold text-white mb-1">Quality Crafted</div>
-                <div className="text-sm text-white/80">15+ years tradition</div>
-              </div>
-            </motion.div>
-          </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
-
-
