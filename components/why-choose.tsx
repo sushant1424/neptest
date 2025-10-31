@@ -2,14 +2,15 @@
 
 import { motion } from "framer-motion";
 import { Leaf, Recycle, Users, Gem, Globe, Heart } from "lucide-react";
+import { useTheme } from "@/contexts/theme-context";
 
 const items = [
-  { icon: Leaf, title: "Eco-Friendly Materials", desc: "100% natural hemp grown without pesticides or harmful chemicals in the Himalayan region" },
-  { icon: Recycle, title: "Zero Waste Process", desc: "Every part of the hemp plant is utilized, ensuring minimal environmental impact" },
-  { icon: Users, title: "Artisan Communities", desc: "Supporting over 200 skilled artisan families across rural Nepal" },
-  { icon: Gem, title: "Premium Quality", desc: "Each bag undergoes rigorous quality checks to ensure lasting durability" },
-  { icon: Globe, title: "Global Impact", desc: "Bringing traditional Nepali craftsmanship to conscious consumers worldwide" },
-  { icon: Heart, title: "Made with Love", desc: "Every stitch carries the dedication and pride of our master craftspeople" },
+  { icon: Leaf, title: "Eco-Friendly Materials", desc: "100% natural hemp grown without pesticides or harmful chemicals in the Himalayan region", iconColor: "text-emerald-400", bgColor: "bg-emerald-500/10", borderColor: "border-emerald-500/20" },
+  { icon: Recycle, title: "Zero Waste Process", desc: "Every part of the hemp plant is utilized, ensuring minimal environmental impact", iconColor: "text-blue-400", bgColor: "bg-blue-500/10", borderColor: "border-blue-500/20" },
+  { icon: Users, title: "Artisan Communities", desc: "Supporting over 200 skilled artisan families across rural Nepal", iconColor: "text-amber-400", bgColor: "bg-amber-500/10", borderColor: "border-amber-500/20" },
+  { icon: Gem, title: "Premium Quality", desc: "Each bag undergoes rigorous quality checks to ensure lasting durability", iconColor: "text-purple-400", bgColor: "bg-purple-500/10", borderColor: "border-purple-500/20" },
+  { icon: Globe, title: "Global Impact", desc: "Bringing traditional Nepali craftsmanship to conscious consumers worldwide", iconColor: "text-cyan-400", bgColor: "bg-cyan-500/10", borderColor: "border-cyan-500/20" },
+  { icon: Heart, title: "Made with Love", desc: "Every stitch carries the dedication and pride of our master craftspeople", iconColor: "text-rose-400", bgColor: "bg-rose-500/10", borderColor: "border-rose-500/20" },
 ];
 
 const containerVariants = {
@@ -36,23 +37,14 @@ const itemVariants = {
 };
 
 export function WhyChoose() {
+  const { theme } = useTheme();
+  
   return (
-    <section className="relative py-20 bg-[#f9f6f3] overflow-hidden">
-      {/* Traditional Nepali Pattern Background */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="nepaliPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-              <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="1"/>
-              <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="1"/>
-              <circle cx="50" cy="50" r="10" fill="none" stroke="currentColor" strokeWidth="1"/>
-              <path d="M50,20 L50,80 M20,50 L80,50" stroke="currentColor" strokeWidth="1"/>
-              <path d="M35,35 L65,65 M65,35 L35,65" stroke="currentColor" strokeWidth="1"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#nepaliPattern)" />
-        </svg>
-      </div>
+    <section className={`relative py-20 overflow-hidden ${
+      theme === "dark" 
+        ? "bg-[#0a0a0a]" 
+        : "bg-[#f9f6f3]"
+    }`}>
       
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -96,7 +88,9 @@ export function WhyChoose() {
               <path d="M5,20 L9,12 L12,16 L15,10 L19,20 Z" fill="currentColor" opacity="0.3"/>
             </motion.svg>
             
-            <h2 className="text-center text-3xl sm:text-4xl tracking-[0.12em] font-semibold text-[#2d2520]" style={{fontFamily:"var(--font-display)"}}>Why Choose Antique Nepal</h2>
+            <h2 className={`text-center text-3xl sm:text-4xl tracking-[0.12em] font-semibold ${
+              theme === "dark" ? "text-white" : "text-[#2d2520]"
+            }`} style={{fontFamily:"var(--font-display)"}}>Why Choose Antique Nepal</h2>
             
             {/* Mountain Icon Right */}
             <motion.svg 
@@ -146,7 +140,9 @@ export function WhyChoose() {
               transition={{ duration: 0.8, delay: 0.3 }}
             />
           </div>
-          <p className="text-center text-sm text-neutral-600 mb-12">Authenticity, sustainability, and craftsmanship in every bag</p>
+          <p className={`text-center text-sm mb-12 ${
+            theme === "dark" ? "text-neutral-400" : "text-neutral-600"
+          }`}>Authenticity, sustainability, and craftsmanship in every bag</p>
         </motion.div>
         
         <motion.div 
@@ -162,17 +158,29 @@ export function WhyChoose() {
               variants={itemVariants}
               whileHover={{ y: -12, scale: 1.03, boxShadow: "0 20px 40px rgba(0,0,0,0.15)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="rounded-xl bg-white border border-[#e8e0d8] p-8 shadow-sm hover:shadow-2xl text-center group cursor-pointer"
+              className={`rounded-xl p-8 shadow-lg hover:shadow-2xl text-center group cursor-pointer transition-all duration-300 ${
+                theme === "dark"
+                  ? "bg-gradient-to-br from-[#1f1f1f] to-[#2a2a2a] border border-white/10 hover:border-emerald-500/30"
+                  : "bg-white border border-[#e8e0d8] hover:border-emerald-500/50"
+              }`}
             >
               <motion.div 
-                className="mx-auto mb-5 h-16 w-16 rounded-full bg-[#e8f3e8] flex items-center justify-center"
+                className={`mx-auto mb-5 h-16 w-16 rounded-full flex items-center justify-center ${
+                  theme === "dark" ? `${it.bgColor} border ${it.borderColor}` : `${it.bgColor} border ${it.borderColor}`
+                }`}
                 whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.15 }}
                 transition={{ duration: 0.5 }}
               >
-                <it.icon className="h-7 w-7 text-[#4a7c59] transition-transform group-hover:scale-110"/>
+                <it.icon className={`h-7 w-7 transition-transform group-hover:scale-110 ${
+                  theme === "dark" ? it.iconColor : "text-[#4a7c59]"
+                }`}/>
               </motion.div>
-              <h3 className="font-semibold text-base text-[#2d2520] mb-2">{it.title}</h3>
-              <p className="text-sm text-neutral-600 leading-relaxed">{it.desc}</p>
+              <h3 className={`font-semibold text-base mb-2 ${
+                theme === "dark" ? "text-white" : "text-[#2d2520]"
+              }`}>{it.title}</h3>
+              <p className={`text-sm leading-relaxed ${
+                theme === "dark" ? "text-neutral-400" : "text-neutral-600"
+              }`}>{it.desc}</p>
             </motion.div>
           ))}
         </motion.div>

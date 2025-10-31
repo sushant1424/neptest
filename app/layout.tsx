@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cinzel, Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/contexts/theme-context";
 
 const displaySerif = Cinzel({ weight: ["400","700"], subsets: ["latin"], variable: "--font-display" });
 const bodySans = Inter({ subsets: ["latin"], variable: "--font-body" });
@@ -20,7 +21,9 @@ export default function RootLayout({
       <body
         className={`${displaySerif.variable} ${bodySans.variable} antialiased bg-background text-foreground`}
       >
-        {children}
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

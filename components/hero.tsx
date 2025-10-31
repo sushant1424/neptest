@@ -3,22 +3,99 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Leaf, Users, Award } from "lucide-react";
-import { ShoppingBag, ArrowRight } from "lucide-react";
+import { Leaf, Users, Award, ShoppingBag, ArrowRight } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { useTheme } from "@/contexts/theme-context";
 
-// Floating particles
-const particles = Array.from({ length: 20 }, (_, i) => ({
-  id: i,
-  x: Math.random() * 100,
-  y: Math.random() * 100,
-  size: Math.random() * 4 + 2,
-  duration: Math.random() * 10 + 20,
-  delay: Math.random() * 5,
-}));
+// Prayer flag colors
+const PRAYER_FLAG_COLORS = [
+  { bg: 'bg-blue-500/60', shadow: 'shadow-[0_0_20px_rgba(59,130,246,0.5)]' },
+  { bg: 'bg-white/60', shadow: 'shadow-[0_0_20px_rgba(255,255,255,0.5)]' },
+  { bg: 'bg-red-500/60', shadow: 'shadow-[0_0_20px_rgba(239,68,68,0.5)]' },
+  { bg: 'bg-emerald-500/60', shadow: 'shadow-[0_0_20px_rgba(16,185,129,0.5)]' },
+  { bg: 'bg-amber-400/60', shadow: 'shadow-[0_0_20px_rgba(251,191,36,0.5)]' },
+] as const;
+
+// Feature cards data
+interface FeatureCard {
+  icon: LucideIcon;
+  iconColor: string;
+  hoverGradient: string;
+  title: string;
+  description: string;
+  delay: number;
+}
+
+const FEATURE_CARDS: FeatureCard[] = [
+  {
+    icon: Leaf,
+    iconColor: 'text-emerald-400',
+    hoverGradient: 'from-emerald-400/20',
+    title: '100% Eco-Friendly',
+    description: 'Sustainable hemp fiber',
+    delay: 0.1,
+  },
+  {
+    icon: Users,
+    iconColor: 'text-blue-400',
+    hoverGradient: 'from-blue-400/20',
+    title: 'Fair Trade',
+    description: 'Supporting local artisans',
+    delay: 0.2,
+  },
+  {
+    icon: Award,
+    iconColor: 'text-amber-400',
+    hoverGradient: 'from-amber-400/20',
+    title: 'Quality Crafted',
+    description: '15+ years tradition',
+    delay: 0.3,
+  },
+];
+
+// Animation constants
+const ANIMATION_CONFIG = {
+  fadeInUp: {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    viewport: { once: true },
+  },
+  hoverScale: {
+    whileHover: { scale: 1.05, y: -2 },
+    whileTap: { scale: 0.95 },
+  },
+} as const;
+
+// Floating particles with fixed positions to avoid hydration errors
+const particles = [
+  { id: 0, x: 15.2, y: 23.5, size: 3.2, duration: 25, delay: 0.5 },
+  { id: 1, x: 78.6, y: 45.8, size: 4.8, duration: 28, delay: 1.2 },
+  { id: 2, x: 42.3, y: 67.2, size: 2.5, duration: 22, delay: 2.1 },
+  { id: 3, x: 88.9, y: 12.4, size: 5.5, duration: 30, delay: 0.8 },
+  { id: 4, x: 25.7, y: 89.3, size: 3.8, duration: 26, delay: 1.8 },
+  { id: 5, x: 63.4, y: 34.6, size: 4.2, duration: 24, delay: 2.5 },
+  { id: 6, x: 9.8, y: 56.7, size: 2.8, duration: 27, delay: 1.5 },
+  { id: 7, x: 51.2, y: 78.9, size: 5.2, duration: 29, delay: 0.3 },
+  { id: 8, x: 72.5, y: 21.3, size: 3.5, duration: 23, delay: 2.8 },
+  { id: 9, x: 34.8, y: 92.1, size: 4.5, duration: 25, delay: 1.1 },
+  { id: 10, x: 91.3, y: 48.7, size: 2.2, duration: 28, delay: 2.3 },
+  { id: 11, x: 18.6, y: 65.4, size: 5.8, duration: 22, delay: 0.6 },
+  { id: 12, x: 56.9, y: 8.2, size: 3.1, duration: 26, delay: 1.9 },
+  { id: 13, x: 82.1, y: 73.5, size: 4.1, duration: 24, delay: 2.6 },
+  { id: 14, x: 7.4, y: 41.8, size: 2.9, duration: 29, delay: 0.9 },
+  { id: 15, x: 45.7, y: 15.6, size: 5.4, duration: 27, delay: 1.4 },
+  { id: 16, x: 68.2, y: 84.3, size: 3.6, duration: 23, delay: 2.2 },
+  { id: 17, x: 29.5, y: 52.9, size: 4.9, duration: 25, delay: 0.7 },
+  { id: 18, x: 95.8, y: 29.1, size: 2.6, duration: 28, delay: 1.6 },
+  { id: 19, x: 12.3, y: 96.4, size: 5.1, duration: 26, delay: 2.4 },
+];
 
 export function Hero() {
+  const { theme } = useTheme();
+  
   return (
     <section className="relative min-h-screen w-full overflow-hidden">
+      {/* Original Image Background */}
       <Image
         src="/hero-mountains%201.png"
         alt="Himalayan mountains"
@@ -26,9 +103,12 @@ export function Hero() {
         priority
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-black/65"/>
       
-      {/* Prayer Flags Animation */}
+      <div className={`absolute inset-0 ${
+        theme === "dark" ? "bg-black/65" : "bg-black/30"
+      }`}/>
+      
+      {/* Prayer Flags Animation - Enhanced */}
       <div className="absolute top-16 left-0 right-0 h-32 overflow-hidden pointer-events-none z-10">
         {[...Array(12)].map((_, i) => (
           <motion.div
@@ -49,17 +129,11 @@ export function Hero() {
               delay: i * 0.1,
             }}
           >
-            <div className={`w-full h-full ${
-              i % 5 === 0 ? 'bg-blue-400/40' :
-              i % 5 === 1 ? 'bg-white/40' :
-              i % 5 === 2 ? 'bg-red-400/40' :
-              i % 5 === 3 ? 'bg-green-400/40' :
-              'bg-yellow-400/40'
-            } backdrop-blur-sm border border-white/20 shadow-lg`} />
+            <div className={`w-full h-full ${PRAYER_FLAG_COLORS[i % 5].bg} ${PRAYER_FLAG_COLORS[i % 5].shadow} backdrop-blur-sm border border-white/30 shadow-lg`} />
           </motion.div>
         ))}
         <motion.div
-          className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+          className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-white/50 to-transparent shadow-[0_0_10px_rgba(255,255,255,0.5)]"
           animate={{ scaleX: [0.8, 1, 0.8] }}
           transition={{ duration: 3, repeat: Infinity }}
         />
@@ -134,7 +208,7 @@ export function Hero() {
               style={{fontFamily:"var(--font-display)"}}
             >
               <motion.span
-                className="bg-gradient-to-r from-white via-amber-100 to-white bg-clip-text text-transparent"
+                className="bg-gradient-to-r from-amber-100 via-white to-amber-100 bg-clip-text text-transparent"
                 animate={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                 }}
@@ -149,22 +223,6 @@ export function Hero() {
               >
                 ANTIQUE NEPAL
               </motion.span>
-              <motion.div
-                className="absolute inset-0 blur-2xl opacity-30"
-                animate={{
-                  scale: [1, 1.05, 1],
-                  opacity: [0.3, 0.5, 0.3],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <span className="bg-gradient-to-r from-amber-200 to-emerald-200 bg-clip-text text-transparent">
-                  ANTIQUE NEPAL
-                </span>
-              </motion.div>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 12 }}
@@ -188,22 +246,8 @@ export function Hero() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mb-16">
-            <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button className="relative overflow-hidden bg-[#8b5a3c] hover:bg-[#6a4a2f] rounded-md h-11 px-7 text-sm font-medium group">
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-amber-400/20 to-orange-400/20"
-                  animate={{
-                    x: ["-100%", "100%"],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                />
+            <motion.div {...ANIMATION_CONFIG.hoverScale}>
+              <Button className="relative overflow-hidden bg-[#047857] hover:bg-[#059669] rounded-md h-11 px-7 text-sm font-medium group">
                 <span className="relative flex items-center">
                   <ShoppingBag className="mr-2 h-4 w-4" />
                   Explore Collection
@@ -216,10 +260,7 @@ export function Hero() {
                 </span>
               </Button>
             </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <motion.div {...ANIMATION_CONFIG.hoverScale}>
               <Button variant="outline" className="relative overflow-hidden rounded-md h-11 px-7 text-sm font-medium border-white/50 bg-white/5 text-white hover:bg-white/15 hover:text-white backdrop-blur-sm">
                 <motion.div
                   className="absolute inset-0 bg-white/10"
@@ -235,81 +276,37 @@ export function Hero() {
           {/* Feature Cards */}
           <div className="max-w-5xl w-full px-6 pb-12">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.6 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -8, scale: 1.05 }}
-              className="relative rounded-xl bg-white/10 backdrop-blur-md shadow-[0_14px_40px_rgba(0,0,0,0.3)] border border-white/20 p-6 flex flex-col items-center text-center group cursor-pointer overflow-hidden"
-            >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-transparent opacity-0 group-hover:opacity-100"
-                transition={{ duration: 0.3 }}
-              />
-              <motion.div 
-                className="mb-3 h-12 w-12 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center relative z-10"
-                whileHover={{ rotate: 360, scale: 1.2 }}
-                transition={{ duration: 0.6 }}
-              >
-                <Leaf className="h-6 w-6 text-emerald-300"/>
-              </motion.div>
-              <div className="text-white relative z-10">
-                <div className="text-base font-semibold text-white mb-1">100% Eco-Friendly</div>
-                <div className="text-sm text-white/80">Sustainable hemp fiber</div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -8, scale: 1.05 }}
-              className="relative rounded-xl bg-white/10 backdrop-blur-md shadow-[0_14px_40px_rgba(0,0,0,0.3)] border border-white/20 p-6 flex flex-col items-center text-center group cursor-pointer overflow-hidden"
-            >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-transparent opacity-0 group-hover:opacity-100"
-                transition={{ duration: 0.3 }}
-              />
-              <motion.div 
-                className="mb-3 h-12 w-12 rounded-full bg-blue-500/20 border border-blue-400/40 flex items-center justify-center relative z-10"
-                whileHover={{ rotate: 360, scale: 1.2 }}
-                transition={{ duration: 0.6 }}
-              >
-                <Users className="h-6 w-6 text-blue-300"/>
-              </motion.div>
-              <div className="text-white relative z-10">
-                <div className="text-base font-semibold text-white mb-1">Fair Trade</div>
-                <div className="text-sm text-white/80">Supporting local artisans</div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -8, scale: 1.05 }}
-              className="relative rounded-xl bg-white/10 backdrop-blur-md shadow-[0_14px_40px_rgba(0,0,0,0.3)] border border-white/20 p-6 flex flex-col items-center text-center group cursor-pointer overflow-hidden"
-            >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-amber-400/20 to-transparent opacity-0 group-hover:opacity-100"
-                transition={{ duration: 0.3 }}
-              />
-              <motion.div 
-                className="mb-3 h-12 w-12 rounded-full bg-amber-500/20 border border-amber-400/40 flex items-center justify-center relative z-10"
-                whileHover={{ rotate: 360, scale: 1.2 }}
-                transition={{ duration: 0.6 }}
-              >
-                <Award className="h-6 w-6 text-amber-300"/>
-              </motion.div>
-              <div className="text-white relative z-10">
-                <div className="text-base font-semibold text-white mb-1">Quality Crafted</div>
-                <div className="text-sm text-white/80">15+ years tradition</div>
-              </div>
-            </motion.div>
-          </div>
+              {FEATURE_CARDS.map((card) => {
+                const Icon = card.icon;
+                return (
+                  <motion.div
+                    key={card.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: card.delay, duration: 0.6 }}
+                    viewport={{ once: true }}
+                    whileHover={{ y: -8, scale: 1.05 }}
+                    className="relative rounded-xl bg-white/10 backdrop-blur-md shadow-[0_14px_40px_rgba(0,0,0,0.3)] border border-white/20 p-6 flex flex-col items-center text-center group cursor-pointer overflow-hidden"
+                  >
+                    <motion.div
+                      className={`absolute inset-0 bg-gradient-to-br ${card.hoverGradient} to-transparent opacity-0 group-hover:opacity-100`}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.div 
+                      className="mb-3 h-12 w-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center relative z-10"
+                      whileHover={{ rotate: 360, scale: 1.2 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <Icon className={`h-6 w-6 ${card.iconColor}`} />
+                    </motion.div>
+                    <div className="text-white relative z-10">
+                      <div className="text-base font-semibold text-white mb-1">{card.title}</div>
+                      <div className="text-sm text-white/80">{card.description}</div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

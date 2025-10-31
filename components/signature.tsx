@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Leaf, Heart, Star } from "lucide-react";
+import { useTheme } from "@/contexts/theme-context";
 
 const features = [
   { 
@@ -23,8 +24,14 @@ const features = [
 ];
 
 export function Signature() {
+  const { theme } = useTheme();
+  
   return (
-    <section className="relative py-20 bg-[#f9f6f3] overflow-hidden">
+    <section className={`relative py-20 overflow-hidden ${
+      theme === "dark"
+        ? "bg-[#0a0a0a]"
+        : "bg-[#faf8f5]"
+    }`}>
       {/* Floating Leaves */}
       {[...Array(8)].map((_, i) => (
         <motion.div
@@ -67,7 +74,7 @@ export function Signature() {
               width="45" 
               height="45" 
               viewBox="0 0 24 24" 
-              className="text-slate-700"
+              className="text-slate-400"
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -81,7 +88,7 @@ export function Signature() {
               width="35" 
               height="35" 
               viewBox="0 0 24 24" 
-              className="text-emerald-600"
+              className="text-emerald-400"
               animate={{ y: [0, -4, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -93,14 +100,16 @@ export function Signature() {
               <circle cx="17" cy="13" r="2" fill="currentColor" opacity="0.6"/>
             </motion.svg>
             
-            <h3 className="text-center text-3xl sm:text-4xl tracking-[0.08em] font-semibold text-[#2d2520]" style={{fontFamily:"var(--font-display)"}}>Our Signature Collection</h3>
+            <h3 className={`text-center text-3xl sm:text-4xl tracking-[0.08em] font-semibold ${
+              theme === "dark" ? "text-white" : "text-[#2d2520]"
+            }`} style={{fontFamily:"var(--font-display)"}}>Our Signature Collection</h3>
             
             {/* Hemp Plant Right */}
             <motion.svg 
               width="35" 
               height="35" 
               viewBox="0 0 24 24" 
-              className="text-emerald-600"
+              className="text-emerald-400"
               animate={{ y: [0, -4, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
             >
@@ -117,7 +126,7 @@ export function Signature() {
               width="45" 
               height="45" 
               viewBox="0 0 24 24" 
-              className="text-slate-700"
+              className="text-slate-400"
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             >
@@ -126,13 +135,19 @@ export function Signature() {
               <circle cx="14" cy="5" r="1.5" fill="white" opacity="0.6"/>
             </motion.svg>
           </div>
-          <p className="text-center text-sm text-neutral-600 mb-12">Every piece tells a story of heritage, sustainability, and craftsmanship</p>
+          <p className={`text-center text-sm mb-12 ${
+            theme === "dark" ? "text-neutral-400" : "text-neutral-600"
+          }`}>Every piece tells a story of heritage, sustainability, and craftsmanship</p>
         </motion.div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center mb-12 sm:mb-16 max-w-sm lg:max-w-none mx-auto">
           {/* Image */}
           <motion.div 
-            className="relative aspect-square rounded-2xl overflow-hidden shadow-lg bg-white p-6 cursor-pointer"
+            className={`relative aspect-square rounded-2xl overflow-hidden shadow-xl p-4 sm:p-6 cursor-pointer scale-90 sm:scale-100 ${
+              theme === "dark"
+                ? "bg-gradient-to-br from-[#1f1f1f] to-[#2a2a2a] border border-white/10"
+                : "bg-white border border-[#e0d5c7]"
+            }`}
             initial={{ opacity: 0, x: -50, rotateY: -15 }}
             whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
             viewport={{ once: false, margin: "-100px", amount: 0.3 }}
@@ -150,11 +165,15 @@ export function Signature() {
           </motion.div>
 
           {/* Features */}
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-3 sm:gap-4 lg:gap-5">
             {features.map((feature, i) => (
               <motion.div 
                 key={i} 
-                className="rounded-xl bg-white border border-[#e0d5c7] p-5 flex items-start gap-4 shadow-sm hover:shadow-xl transition-all group cursor-pointer"
+                className={`rounded-xl p-3 sm:p-4 lg:p-5 flex items-start gap-3 sm:gap-4 shadow-lg hover:shadow-xl transition-all group cursor-pointer ${
+                  theme === "dark"
+                    ? "bg-gradient-to-br from-[#1f1f1f] to-[#2a2a2a] border border-white/10 hover:border-emerald-500/30 hover:shadow-emerald-500/10"
+                    : "bg-white border border-[#e0d5c7] hover:border-emerald-500/50"
+                }`}
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: false, margin: "-50px", amount: 0.2 }}
@@ -162,15 +181,25 @@ export function Signature() {
                 whileHover={{ x: 10, scale: 1.03, borderColor: "#2d7a5f" }}
               >
                 <motion.div 
-                  className="flex-shrink-0 h-10 w-10 rounded-lg bg-[#2d7a5f] flex items-center justify-center"
+                  className={`flex-shrink-0 h-8 w-8 sm:h-10 sm:w-10 rounded-lg flex items-center justify-center ${
+                    theme === "dark"
+                      ? "bg-emerald-500/20 border border-emerald-500/30"
+                      : "bg-[#2d7a5f] border border-emerald-600"
+                  }`}
                   whileHover={{ rotate: [0, 360], scale: [1, 1.2, 1] }}
                   transition={{ duration: 0.6 }}
                 >
-                  <feature.icon className="h-5 w-5 text-white"/>
+                  <feature.icon className={`h-4 w-4 sm:h-5 sm:w-5 ${
+                    theme === "dark" ? "text-emerald-400" : "text-white"
+                  }`}/>
                 </motion.div>
                 <div>
-                  <h4 className="text-base font-semibold text-[#2d2520] mb-1">{feature.title}</h4>
-                  <p className="text-sm text-neutral-600 leading-relaxed">{feature.desc}</p>
+                  <h4 className={`text-sm sm:text-base font-semibold mb-1 ${
+                    theme === "dark" ? "text-white" : "text-[#2d2520]"
+                  }`}>{feature.title}</h4>
+                  <p className={`text-xs sm:text-sm leading-relaxed ${
+                    theme === "dark" ? "text-neutral-400" : "text-neutral-600"
+                  }`}>{feature.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -186,7 +215,7 @@ export function Signature() {
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <motion.div 
-            className="rounded-2xl bg-gradient-to-r from-[#5a7d8c] to-[#4a7c59] text-white text-center py-8 px-6 shadow-lg cursor-pointer"
+            className="rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-white text-center py-8 px-6 shadow-xl shadow-emerald-500/20 border border-emerald-400/20 cursor-pointer"
             whileHover={{ scale: 1.03, boxShadow: "0 25px 50px rgba(0,0,0,0.25)", y: -5 }}
             transition={{ duration: 0.3 }}
           >
