@@ -268,7 +268,7 @@ export function Hero() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mb-16">
             <motion.div {...ANIMATION_CONFIG.hoverScale}>
-              <Button className="relative overflow-hidden bg-[#047857] hover:bg-[#059669] rounded-md h-11 px-7 text-sm font-medium group">
+              <Button className="relative overflow-hidden bg-primary hover:bg-[#059669] rounded-md h-11 px-7 text-sm font-medium group">
                 <span className="relative flex items-center">
                   <ShoppingBag className="mr-2 h-4 w-4" />
                   Explore Collection
