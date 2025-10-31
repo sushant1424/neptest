@@ -208,7 +208,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.5 }}
           >
             <Leaf className="h-4 w-4 text-emerald-300" />
-            <span className="text-sm">
+            <span className="text-sm font-inter">
               100% Sustainable • Handcrafted in Nepal • Est. 2010
             </span>
           </motion.div>
